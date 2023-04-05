@@ -1,33 +1,40 @@
-import sqlalchemy
-from sqlalchemy import create_engine,Table,Integer,String,Column,Text,Identity
-from sqlalchemy import MetaData
+import dbOlusturma as dbislem
+from dbOlusturma import Kisi
+from sqlalchemy import create_engine, select
+from sqlalchemy.orm import sessionmaker, Query
 
 
-engine = create_engine('sqlite:///rehber.db', echo = True)
-meta = MetaData()
-conn=engine.connect()
+# db bağlantı
+engine = create_engine("sqlite:///rehber.db", echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
 
-rehber = Table(
-   'kisiler', meta, 
-   Column('userId', Integer,Identity(1,1)), 
-   Column('ad', Text), 
-   Column('soyAd', Text),
-   Column('telefonNumarası', Text),
-)
-#meta.create_all(engine)
 
-def ekle(ad,soyad,telefon):
-    ins = rehber.insert().values(ad,soyad,telefon)
-    result = conn.execute(ins)
-
-    
+def ekle(ad, soyad, telefon):
+    kisiEkle = dbislem.Kisi(ad=ad, soyad=soyad, numara=telefon)
+    session.add(kisiEkle)
+    session.commit()
     print("başarıyla eklendi")
 
-def sil(user_id):
-    print("başarıyla silindi")
 
 def listele():
+    kayitlar = session.query(Kisi).all()
+    for kayitlar in kayitlar:
+        print(kayitlar.user_id, kayitlar.ad, kayitlar.soyad, kayitlar.numara)
     print("kayıtlar listelendi")
 
-def guncelle(ad,soyad,telefon,user_id):
+
+def sil(user_id):
+    sil = session.query(Kisi).filter(Kisi.user_id == user_id).delete()
+    session.commit()
+    print("başarıyla silindi")
+
+
+def guncelle(ad, soyad, telefon, user_id):
+    guncelle = (
+        session.query(Kisi)
+        .filter(Kisi.user_id == user_id)
+        .update({Kisi.ad: ad, Kisi.soyad: soyad, Kisi.numara: telefon})
+    )
+    session.commit()
     print("kayıt güncellendi")
