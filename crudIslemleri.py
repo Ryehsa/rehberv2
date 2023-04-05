@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker, Query
 
 
 # db bağlantı
+
 engine = create_engine("sqlite:///rehber.db", echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -19,8 +20,9 @@ def ekle(ad, soyad, telefon):
 
 def listele():
     kayitlar = session.query(Kisi).all()
-    for kayitlar in kayitlar:
-        print(kayitlar.user_id, kayitlar.ad, kayitlar.soyad, kayitlar.numara)
+    for kayit in kayitlar:
+        """print(kayitlar.user_id, kayitlar.ad, kayitlar.soyad, kayitlar.numara)"""
+        print(kayit)
     print("kayıtlar listelendi")
 
 

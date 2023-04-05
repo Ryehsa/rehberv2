@@ -14,12 +14,16 @@ class Kisi(Base):
     __tablename__ = "kisiler"
 
     user_id = Column(Integer, primary_key=True, autoincrement=True)
+    password = Column(String)
     ad = Column(String)
     soyad = Column(String)
     numara = Column(Integer)
 
-    def __repr__(self):
-        return f"<Kisi(user_id={self.user_id}, ad='{self.ad}', soyad='{self.soyad}', numara={self.numara})>"
+    def __str__(self) -> str:
+        return f"{self.ad} - {self.soyad}"
+
+    """ def __repr__(self):
+        return f"<Kisi(user_id={self.user_id}, ad='{self.ad}', soyad='{self.soyad}', numara={self.numara})>" """
 
 
 # Veritabanını oluşturma
