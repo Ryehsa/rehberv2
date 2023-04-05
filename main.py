@@ -1,7 +1,6 @@
 import crudIslemleri as secimislem
 
 
-# işlem seçimi
 print(" 1- Kayıt Ekle \n 2- Kayıt Sil\n 3- Kayıt Güncelle \n 4- Kayıt Listele")
 islem = int(input("İşlem Seçiniz : "))
 
