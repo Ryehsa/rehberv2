@@ -20,14 +20,14 @@ class Kisi(Base):
     soyad = Column(String)
     numara = Column(Integer)
 
-    def __str__(self) -> str:
-        return f"{self.ad} - {self.soyad}"
+    """ def __str__(self) -> str:
+        return f"{self.ad} - {self.soyad} """
 
     """ def __repr__(self):
         return f"<Kisi(user_id={self.user_id}, ad='{self.ad}', soyad='{self.soyad}', numara={self.numara})>" """
 
 
 # Veritabanını oluşturma
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()

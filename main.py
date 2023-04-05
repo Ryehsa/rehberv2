@@ -1,4 +1,5 @@
 import crudIslemleri as secimislem
+import hashlib
 
 
 print(" 1- Kayıt Ekle \n 2- Kayıt Sil\n 3- Kayıt Güncelle \n 4- Kayıt Listele")
@@ -10,7 +11,9 @@ if islem == 1:
     ad = input("Ad : ")
     soyad = input("Soyad : ")
     numara = int(input("Numara : "))
-    secimislem.ekle(ad, soyad, numara)
+    sifre = input("Sifre : ")
+    sifre=hashlib.md5(sifre.encode()).hexdigest()
+    secimislem.ekle(ad, soyad, numara,sifre)
 
 # kayıt sil
 elif islem == 2:
@@ -26,7 +29,8 @@ elif islem == 3:
     ad = input("Ad : ")
     soyad = input("Soyad : ")
     numara = int(input("Numara : "))
-    secimislem.guncelle(id, ad, soyad, numara)
+    sifre = input("Sifre : ")
+    secimislem.guncelle(id, ad, soyad, numara,sifre)
 # kayıt listele
 elif islem == 4:
     secimislem.listele()
