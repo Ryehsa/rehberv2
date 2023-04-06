@@ -20,13 +20,13 @@ def ekle(ad, soyad, telefon, sifre):
 
 def listele():
     kayitlar = session.query(Kisi).all()
-    for kayitlar in kayitlar:
+    for kayit in kayitlar:
         print(
-            kayitlar.user_id,
-            kayitlar.ad,
-            kayitlar.soyad,
-            kayitlar.numara,
-            kayitlar.password,
+            kayit.user_id,
+            kayit.ad,
+            kayit.soyad,
+            kayit.numara,
+            kayit.password,
         )
     print("kayıtlar listelendi")
 
@@ -45,3 +45,33 @@ def guncelle(ad, soyad, telefon, user_id):
     )
     session.commit()
     print("kayıt güncellendi")
+
+
+def sifreislemi(user_id, sifre):
+    sifre = str(sifre)
+
+    # kullanıcıdan alınan mevcut sifreyi encode etme
+    """ sifreEslesme = hashlib.md5(sifre.encode("utf-8")).hexdigest() 
+    print(sifreEslesme)"""
+    ###########
+    """ dbSifreBulma = session.query(Kisi).filter_by(user_id = user_id).first()
+    mevcutEnCodeSıfre = dbSifreBulma.password """
+
+    dbSifreBulma = session.query(Kisi).filter(Kisi.user_id == user_id).first()
+    mevcutEnCodeSıfre = dbSifreBulma.password
+
+    print(user_id, dbSifreBulma.ad)
+    print(sifre)
+    print(mevcutEnCodeSıfre)
+
+    if sifre != mevcutEnCodeSıfre:
+        print("Hatalı Şifre ")
+    elif sifre == mevcutEnCodeSıfre:
+        yeni_sifre = input("yeni sifre : ")
+        yeni_sifre = hashlib.md5(yeni_sifre.encode("utf-8")).hexdigest()
+        guncelle = (
+            session.query(Kisi)
+            .filter(Kisi.user_id == user_id)
+            .update({Kisi.password: yeni_sifre})
+        )
+        session.commit()

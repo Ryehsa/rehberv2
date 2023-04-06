@@ -2,7 +2,9 @@ import crudIslemleri as secimislem
 import hashlib
 
 
-print(" 1- Kayıt Ekle \n 2- Kayıt Sil\n 3- Kayıt Güncelle \n 4- Kayıt Listele")
+print(
+    " 1- Kayıt Ekle \n 2- Kayıt Sil\n 3- Kayıt Güncelle \n 4- Kayıt Listele\n5- Sifre guncelleme"
+)
 islem = int(input("İşlem Seçiniz : "))
 
 
@@ -12,15 +14,15 @@ if islem == 1:
     soyad = input("Soyad : ")
     numara = int(input("Numara : "))
     sifre = input("Sifre : ")
-    sifre=hashlib.md5(sifre.encode()).hexdigest()
-    secimislem.ekle(ad, soyad, numara,sifre)
+    sifre_hash = hashlib.md5(sifre.encode("utf-8")).hexdigest()
+    secimislem.ekle(ad, soyad, numara, sifre_hash)
 
 # kayıt sil
 elif islem == 2:
     secimislem.listele()
     id = int(input("Id seçiniz : "))
     print("Silinecek Kayıt Seçiniz : ")
-    secimislem.Sil(id)
+    secimislem.sil(id)
 
 # kayıt güncelle
 elif islem == 3:
@@ -29,10 +31,17 @@ elif islem == 3:
     ad = input("Ad : ")
     soyad = input("Soyad : ")
     numara = int(input("Numara : "))
-    sifre = input("Sifre : ")
-    secimislem.guncelle(id, ad, soyad, numara,sifre)
+    secimislem.guncelle(id, ad, soyad, numara)
 # kayıt listele
 elif islem == 4:
     secimislem.listele()
+# sifre guncelleme
+elif islem == 5:
+    secimislem.listele()
+    id = int(input("Id seçiniz : "))
+    sifre = input("Mevcut Sifre : ")
+    sifre = hashlib.md5(sifre.encode("utf-8")).hexdigest()
+    print(sifre)
+    secimislem.sifreislemi(id, sifre)
 else:
     print("hatalı seçim")
