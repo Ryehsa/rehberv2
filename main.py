@@ -1,6 +1,15 @@
 import crudIslemleri as secimislem
 import hashlib
 
+giris_islem = int(input("İşlem Seçiniz : "))
+print("1-Giris Yap")
+print("2-Kayıt Ol")
+
+if giris_islem == 1:
+    print("giris islemi basarili")
+elif giris_islem == 2:
+    print("Kullanıcı adı : ")
+    print("Sifre : ")
 
 print(
     " 1- Kayıt Ekle \n 2- Kayıt Sil\n 3- Kayıt Güncelle \n 4- Kayıt Listele\n5- Sifre guncelleme"
