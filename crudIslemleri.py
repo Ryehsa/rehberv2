@@ -20,7 +20,7 @@ def ekle(ad, soyad, telefon, sifre):
 
 def listele():
     kayitlar = session.query(Kisi).all()
-    for kayit in kayitlar:
+    for kayitlar in kayitlar:
         print(
             kayitlar.user_id,
             kayitlar.ad,
@@ -28,7 +28,6 @@ def listele():
             kayitlar.numara,
             kayitlar.password,
         )
-
     print("kayıtlar listelendi")
 
 
