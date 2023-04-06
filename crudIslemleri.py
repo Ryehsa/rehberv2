@@ -1,7 +1,7 @@
 import dbOlusturma as dbislem
 from dbOlusturma import Kisi
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Query
+from sqlalchemy.orm import sessionmaker
 import hashlib
 
 # db bağlantı
@@ -11,9 +11,8 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-def ekle(ad, soyad, telefon,sifre):
-    
-    kisiEkle = dbislem.Kisi(ad=ad, soyad=soyad, numara=telefon,password=sifre)
+def ekle(ad, soyad, telefon, sifre):
+    kisiEkle = dbislem.Kisi(ad=ad, soyad=soyad, numara=telefon, password=sifre)
     session.add(kisiEkle)
     session.commit()
     print("başarıyla eklendi")
@@ -22,8 +21,14 @@ def ekle(ad, soyad, telefon,sifre):
 def listele():
     kayitlar = session.query(Kisi).all()
     for kayit in kayitlar:
-        print(kayitlar.user_id, kayitlar.ad, kayitlar.soyad, kayitlar.numara,kayitlar.password) 
-        
+        print(
+            kayitlar.user_id,
+            kayitlar.ad,
+            kayitlar.soyad,
+            kayitlar.numara,
+            kayitlar.password,
+        )
+
     print("kayıtlar listelendi")
 
 
