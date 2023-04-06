@@ -1,16 +1,22 @@
 import crudIslemleri as secimislem
 import hashlib
 
-giris_islem = int(input("İşlem Seçiniz : "))
 print("1-Giris Yap")
 print("2-Kayıt Ol")
-# giris yapma islemş
+giris_islem = int(input("İşlem Seçiniz : "))
+
+# giris yapma islemi
 if giris_islem == 1:
-    print("giris islemi basarili")
+    kullanici_adi = input("kullanıcı adı : ")
+    sifre = input("Şifre : ")
+    sifre_hash = hashlib.md5(sifre.encode("utf-8")).hexdigest()
+    secimislem.kullanici_giris(kullanici_adi, sifre_hash)
 # kayıt olma işlemi
 elif giris_islem == 2:
-    print("Kullanıcı adı : ")
-    print("Sifre : ")
+    kullanici_adi = input("Kullanıcı adı : ")
+    sifre = input("Sifre : ")
+    sifre_hash = hashlib.md5(sifre.encode("utf-8")).hexdigest()
+    secimislem.kullanici_ekle(kullanici_adi, sifre_hash)
 else:
     print("Hatalı Seçim")
     quit()
