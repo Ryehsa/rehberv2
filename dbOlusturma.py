@@ -27,6 +27,13 @@ class Kisi(Base):
         return f"<Kisi(user_id={self.user_id}, ad='{self.ad}', soyad='{self.soyad}', numara={self.numara})>" """
 
 
+class KullaniciGiris(Base):
+    __tablename__ = "kullanici"
+    user_id = Column(Integer, primary_key=True, autoincrement=True)
+    kullanici_adi = Column(String)
+    password = Column(String)
+
+
 # Veritabanını oluşturma
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)

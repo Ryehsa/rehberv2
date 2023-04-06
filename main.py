@@ -4,12 +4,16 @@ import hashlib
 giris_islem = int(input("İşlem Seçiniz : "))
 print("1-Giris Yap")
 print("2-Kayıt Ol")
-
+# giris yapma islemş
 if giris_islem == 1:
     print("giris islemi basarili")
+# kayıt olma işlemi
 elif giris_islem == 2:
     print("Kullanıcı adı : ")
     print("Sifre : ")
+else:
+    print("Hatalı Seçim")
+    quit()
 
 print(
     " 1- Kayıt Ekle \n 2- Kayıt Sil\n 3- Kayıt Güncelle \n 4- Kayıt Listele\n5- Sifre guncelleme"
